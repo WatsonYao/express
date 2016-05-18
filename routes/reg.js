@@ -3,14 +3,25 @@ var router = express.Router();
 
 /* GET users listing. */
 router.post('/', function (req, res, next) {
+
+
     var name = req.body.name,
         password = req.body.password,
         password_re = req.body['password-repeat'];
-
     //检验用户两次输入的密码是否一致
+
+    if (req.body.name == null) {
+        res.send('name == null');
+    }
+
+    if (req.body.password == null) {
+        res.send('password == null');
+    }
+
     if (password_re != password) {
-        req.flash('error', '两次输入的密码不一致!');
-        return res.redirect('/reg');//返回注册页
+        res.send('两次输入的密码不一致');
+        //req.flash('error', '两次输入的密码不一致!');
+        //return res.redirect('/reg');//返回注册页
     }
     //生成密码的 md5 值
     var md5 = crypto.createHash('md5'),
