@@ -90,6 +90,22 @@ app.post('/reg', function (req, res) {
         password = req.body.password,
         password_re = req.body['password-repeat'];
     //检验用户两次输入的密码是否一致
+
+    if (name == null) {
+        res.send('name == null');
+    }
+
+    if (password == null) {
+        res.send('password == null');
+    }
+
+    if (password_re == null) {
+        res.send('password_re == null');
+    }
+
+    if (email == null) {
+        res.send('email == null');
+    }
     if (password_re != password) {
         //req.flash('error', '两次输入的密码不一致!');
         //return res.redirect('/reg');//返回注册页
