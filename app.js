@@ -13,6 +13,7 @@ var User = require('./models/user');
 var routes = require('./routes/index');
 var settings = require('./settings');
 var users = require('./routes/users');
+var reg = require('./routes/reg')
 
 var app = express();
 
@@ -30,6 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/reg', reg);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -64,7 +66,7 @@ app.use(function (err, req, res, next) {
 
 app.use(session({
     secret: settings.cookieSecret,
-    key: settings.db,//cookie name
+    key: app,//cookie name
     cookie: {maxAge: 1000 * 60 * 60 * 24 * 30},//30 days
     store: new MongoStore({
         db: settings.db,
@@ -74,9 +76,11 @@ app.use(session({
 }));
 
 app.post('/reg', function (req, res) {
+
     var name = req.body.name,
         password = req.body.password,
         password_re = req.body['password-repeat'];
+
     //检验用户两次输入的密码是否一致
     if (password_re != password) {
         req.flash('error', '两次输入的密码不一致!');
