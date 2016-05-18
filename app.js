@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 var crypto = require('crypto')
-var User = require('./models/user.js');
+var User = require('./models/user');
 
 
 var routes = require('./routes/index');
