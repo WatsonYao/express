@@ -18,14 +18,19 @@ router.post('/', function (req, res, next) {
         res.send('password == null');
     }
 
+    if (req.body.email == null) {
+        res.send('email == null');
+    }
+
     if (password_re != password) {
         res.send('两次输入的密码不一致');
         //req.flash('error', '两次输入的密码不一致!');
         //return res.redirect('/reg');//返回注册页
     }
     //生成密码的 md5 值
-    var md5 = crypto.createHash('md5'),
-        password = md5.update(req.body.password).digest('hex');
+    //var md5 = crypto.createHash('md5'),
+    //    password = md5.update(req.body.password).digest('hex');
+
     var newUser = new User({
         name: name,
         password: password,
