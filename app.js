@@ -34,8 +34,8 @@ app.get('/test', function (req, res) {
     res.send('hello,my love!');
 });
 
-app.post('/postest', function (req, res) {
-    res.send("post");
+app.post('/post', function (req, res) {
+    res.send(req.param('name') + "<<<");
 });
 
 // catch 404 and forward to error handler
