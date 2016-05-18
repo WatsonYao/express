@@ -35,6 +35,7 @@ app.use('/users', users);
 app.post('/reg', function (req, res) {
     var name = req.body.name,
         password = req.body.password,
+        email = req.body.email,
         password_re = req.body['password-repeat'];
     //检验用户两次输入的密码是否一致
 
