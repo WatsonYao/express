@@ -41,27 +41,32 @@ app.post('/reg', function (req, res) {
 
     if (name == null) {
         res.send('name == null');
+        return;
     }
 
     if (password == null) {
         res.send('password == null');
+        return;
     }
 
     if (password_re == null) {
         res.send('password_re == null');
+        return;
     }
 
     if (email == null) {
         res.send('email == null');
+        return;
     }
     if (password_re != password) {
         //req.flash('error', '两次输入的密码不一致!');
         //return res.redirect('/reg');//返回注册页
         res.send('两次输入的密码不一致');
+        return;
     }
     //生成密码的 md5 值
-    var md5 = crypto.createHash('md5'),
-        password = md5.update(req.body.password).digest('hex');
+    var md5 = crypto.createHash('md5')
+    var password = md5.update(req.body.password).digest('hex');
     var newUser = new User({
         name: name,
         password: password,
@@ -73,11 +78,13 @@ app.post('/reg', function (req, res) {
             //req.flash('error', err);
             //return res.redirect('/');
             res.send('error' + err);
+            return;
         }
         if (user) {
             //req.flash('error', '用户已存在!');
             //return res.redirect('/reg');//返回注册页
             res.send('用户已存在');
+            return;
         }
         //如果不存在则新增用户
         newUser.save(function (err, user) {
@@ -85,11 +92,13 @@ app.post('/reg', function (req, res) {
                 //req.flash('error', err);
                 //return res.redirect('/reg');//注册失败返回主册页
                 res.send('注册失败返回主册页');
+                return;
             }
             //req.session.user = newUser;//用户信息存入 session
             //req.flash('success', '注册成功!');
             //res.redirect('/');//注册成功后返回主页
             res.send('注册成功后返回主页');
+            return;
         });
     });
 });
@@ -134,8 +143,6 @@ app.use(session({
         port: settings.port
     })
 }));
-
-
 
 
 module.exports = app;
