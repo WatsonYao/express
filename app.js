@@ -29,8 +29,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/reg', reg);
+
 app.get('/test', function (req, res) {
     res.send('hello,my love!');
+});
+
+app.post('/postest', function (req, res) {
+    res.send(req.body);
 });
 
 // catch 404 and forward to error handler
@@ -74,7 +79,6 @@ app.use(session({
         port: settings.port
     })
 }));
-
 
 
 module.exports = app;
