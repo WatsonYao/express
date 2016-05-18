@@ -32,57 +32,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
-
-app.get('/test', function (req, res) {
-    res.send('hello,my love!');
-});
-
-app.post('/post', function (req, res) {
-    res.send(req.param("name") + " <<<");
-});
-
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
-});
-
-// error handlers
-
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-    app.use(function (err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
-    });
-}
-
-// production error handler
-// no stacktraces leaked to user
-app.use(function (err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
-});
-
-app.use(session({
-    secret: settings.cookieSecret,
-    key: app,//cookie name
-    cookie: {maxAge: 1000 * 60 * 60 * 24 * 30},//30 days
-    store: new MongoStore({
-        db: settings.db,
-        host: settings.host,
-        port: settings.port
-    })
-}));
-
 app.post('/reg', function (req, res) {
     var name = req.body.name,
         password = req.body.password,
@@ -143,6 +92,49 @@ app.post('/reg', function (req, res) {
         });
     });
 });
+// catch 404 and forward to error handler
+app.use(function (req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+});
+
+// error handlers
+
+// development error handler
+// will print stacktrace
+if (app.get('env') === 'development') {
+    app.use(function (err, req, res, next) {
+        res.status(err.status || 500);
+        res.render('error', {
+            message: err.message,
+            error: err
+        });
+    });
+}
+
+// production error handler
+// no stacktraces leaked to user
+app.use(function (err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+        message: err.message,
+        error: {}
+    });
+});
+
+app.use(session({
+    secret: settings.cookieSecret,
+    key: app,//cookie name
+    cookie: {maxAge: 1000 * 60 * 60 * 24 * 30},//30 days
+    store: new MongoStore({
+        db: settings.db,
+        host: settings.host,
+        port: settings.port
+    })
+}));
+
+
 
 
 module.exports = app;
