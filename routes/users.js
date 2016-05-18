@@ -7,7 +7,7 @@ var assert = require('assert');
 /* GET users listing. */
 router.get('/', function (req, res, next) {
 
-    var mongoose = require('/usr/local/lib/node_modules/mongoose');
+    var mongoose = require('../node_modules/mongoose');
 
     var db = mongoose.createConnection('localhost', 'test');
 
@@ -24,7 +24,7 @@ router.get('/', function (req, res, next) {
     User.find({'name':'watson'},function(err,docs){
         res.render('index', { title: docs});
     });
-    
+
     res.send('respond with a resource');
 });
 
