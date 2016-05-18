@@ -5,8 +5,8 @@ var User = require('../models/user');
 /* GET users listing. */
 router.post('/', function (req, res, next) {
 
-
     res.send(req.body);
+
     var name = req.body.name,
         password = req.body.password,
         password_re = req.body['password-repeat'];
