@@ -9,7 +9,6 @@ var MongoStore = require('connect-mongo')(session);
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var reg = require('./routes/reg')
 var settings = require('./settings');
 var flash = require('connect-flash');
 
@@ -33,7 +32,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
-app.use('/reg', reg);
 
 app.get('/test', function (req, res) {
     res.send('hello,my love!');
