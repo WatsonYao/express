@@ -6,7 +6,7 @@ var User = require('../models/user');
 router.post('/', function (req, res, next) {
 
 
-    res.send(req);
+    res.send(req.toJSON());
     var name = req.body.name,
         password = req.body.password,
         password_re = req.body['password-repeat'];
